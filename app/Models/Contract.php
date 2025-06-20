@@ -19,4 +19,9 @@ class Contract extends Model
     {
         return $this->hasMany(ContractCost::class, 'entities_id', 'entities_id');
     }
+
+    public function entity(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Entity::class, 'entities_id', 'id');
+    }
 }
