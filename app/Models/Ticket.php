@@ -10,18 +10,29 @@ class Ticket extends Model
 {
     use HasFactory;
     protected $table = 'glpi_tickets';
+    protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
         'name',
         'solvedate',
-        'entities_id'
+        'entities_id',
+        'date_creation'
     ];
 
-    public function vnGroup()
+    public function vnGroup(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(VnGroup::class, 'items_id', 'id');
     }
 
+    public function entity(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Entity::class, 'entities_id', 'id');
+    }
+
+    public function category(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Categorie::class, 'itilcategories_id');
+    }
 
     protected function responseTimeHours(): Attribute
     {
