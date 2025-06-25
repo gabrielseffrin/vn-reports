@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EntityController;
 use App\Http\Controllers\ReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -23,3 +24,4 @@ Route::post('/tickets/pdf', [ReportController::class, 'generatePdf']);
 Route::post('/reports/tickets/json', [ReportController::class, 'fetchTickets'])->name('reports.tickets.json');
 Route::post('/tickets', [ReportController::class, 'fetchTickets']);
 
+Route::get('/entities', [EntityController::class, 'getEntities']);
